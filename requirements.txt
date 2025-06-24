@@ -1,0 +1,11 @@
+pytest
+openai
+azure-ai-projects
+azure-ai-agents
+azure-identity
+python-dotenv
+azure-ai-contentsafety
+azure-ai-inference
+azure-monitor-opentelemetry
+opentelemetry-api
+opentelemetry-sdk
