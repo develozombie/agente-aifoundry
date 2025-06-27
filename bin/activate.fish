@@ -33,11 +33,11 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /Users/jose/botmbbk/foundry-samples/samples/microsoft/python/getting-started-agents/agent-client
+set -gx VIRTUAL_ENV /Users/jose/proyectoAgentes/agente-aifoundry
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH
-set -gx VIRTUAL_ENV_PROMPT agent-client
+set -gx VIRTUAL_ENV_PROMPT agente-aifoundry
 
 # Unset PYTHONHOME if set.
 if set -q PYTHONHOME
@@ -57,7 +57,7 @@ if test -z "$VIRTUAL_ENV_DISABLE_PROMPT"
         set -l old_status $status
 
         # Output the venv prompt; color taken from the blue of the Python logo.
-        printf "%s(%s)%s " (set_color 4B8BBE) agent-client (set_color normal)
+        printf "%s(%s)%s " (set_color 4B8BBE) agente-aifoundry (set_color normal)
 
         # Restore the return status of the previous command.
         echo "exit $old_status" | .

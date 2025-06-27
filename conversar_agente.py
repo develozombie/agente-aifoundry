@@ -102,7 +102,7 @@ def moderar_texto(texto, cliente):
                 severidad_maxima = max(severidad_maxima, resultado_categoria.severity)
                 span.set_attribute(f"moderation.{resultado_categoria.category.lower()}_severity", resultado_categoria.severity)
                 
-                if resultado_categoria.severity >= 4:  # Severidad alta
+                if resultado_categoria.severity >= 2:  # Severidad media
                     esta_marcado = True
                     categorias_marcadas.append(f"{resultado_categoria.category} (severidad: {resultado_categoria.severity})")
             

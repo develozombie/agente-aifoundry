@@ -9,17 +9,17 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV /Users/jose/botmbbk/foundry-samples/samples/microsoft/python/getting-started-agents/agent-client
+setenv VIRTUAL_ENV /Users/jose/proyectoAgentes/agente-aifoundry
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/"bin":$PATH"
-setenv VIRTUAL_ENV_PROMPT agent-client
+setenv VIRTUAL_ENV_PROMPT agente-aifoundry
 
 
 set _OLD_VIRTUAL_PROMPT="$prompt"
 
 if (! "$?VIRTUAL_ENV_DISABLE_PROMPT") then
-    set prompt = "("agent-client") $prompt:q"
+    set prompt = "("agente-aifoundry") $prompt:q"
 endif
 
 alias pydoc python -m pydoc
