@@ -173,20 +173,20 @@ flowchart TD
     StartMCP --> ShowMenu
     StopMCP --> ShowMenu
     ShowStatus --> ShowMenu
-    ShowError --> End([🔚 Fin])
-    Exit --> End
+    ShowError --> EndFlow([🔚 Fin])
+    Exit --> EndFlow
     
-    classDef start fill:#c8e6c9,stroke:#4caf50,stroke-width:3px
-    classDef process fill:#bbdefb,stroke:#2196f3,stroke-width:2px
-    classDef decision fill:#ffe0b2,stroke:#ff9800,stroke-width:2px
-    classDef error fill:#ffcdd2,stroke:#f44336,stroke-width:2px
-    classDef end fill:#f8bbd9,stroke:#e91e63,stroke-width:3px
+    classDef startNode fill:#c8e6c9,stroke:#4caf50,stroke-width:3px
+    classDef processNode fill:#bbdefb,stroke:#2196f3,stroke-width:2px
+    classDef decisionNode fill:#ffe0b2,stroke:#ff9800,stroke-width:2px
+    classDef errorNode fill:#ffcdd2,stroke:#f44336,stroke-width:2px
+    classDef endNode fill:#f8bbd9,stroke:#e91e63,stroke-width:3px
     
-    class Start start
-    class ShowMenu,ManageAgents,StartChat,ManageMCP,ShowStatus,CreateAgent,UpdateAgent,DeleteAgent,ListAgents,SelectAgent,ChatLoop,StartMCP,StopMCP,CreateFirst process
-    class ValidateEnv,MenuChoice,AgentFlow,CheckAgents,MCPChoice decision
-    class ShowError error
-    class Exit,End end
+    class Start startNode
+    class ShowMenu,ManageAgents,StartChat,ManageMCP,ShowStatus,CreateAgent,UpdateAgent,DeleteAgent,ListAgents,SelectAgent,ChatLoop,StartMCP,StopMCP,CreateFirst processNode
+    class ValidateEnv,MenuChoice,AgentFlow,CheckAgents,MCPChoice decisionNode
+    class ShowError errorNode
+    class Exit,EndFlow endNode
 ```
 
 ### Flujo de Creación de Agentes
@@ -252,26 +252,26 @@ flowchart TD
     
     UseExisting --> Success
     ShowError --> Return
-    Success --> End([🔚 Fin])
-    Return --> End
+    Success --> EndFlow([🔚 Fin])
+    Return --> EndFlow
     
-    classDef start fill:#c8e6c9,stroke:#4caf50,stroke-width:3px
-    classDef process fill:#bbdefb,stroke:#2196f3,stroke-width:2px
-    classDef decision fill:#ffe0b2,stroke:#ff9800,stroke-width:2px
-    classDef input fill:#e1bee7,stroke:#9c27b0,stroke-width:2px
-    classDef azure fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-    classDef success fill:#c8e6c9,stroke:#4caf50,stroke-width:2px
-    classDef error fill:#ffcdd2,stroke:#f44336,stroke-width:2px
-    classDef end fill:#f8bbd9,stroke:#e91e63,stroke-width:3px
+    classDef startNode fill:#c8e6c9,stroke:#4caf50,stroke-width:3px
+    classDef processNode fill:#bbdefb,stroke:#2196f3,stroke-width:2px
+    classDef decisionNode fill:#ffe0b2,stroke:#ff9800,stroke-width:2px
+    classDef inputNode fill:#e1bee7,stroke:#9c27b0,stroke-width:2px
+    classDef azureNode fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef successNode fill:#c8e6c9,stroke:#4caf50,stroke-width:2px
+    classDef errorNode fill:#ffcdd2,stroke:#f44336,stroke-width:2px
+    classDef endNode fill:#f8bbd9,stroke:#e91e63,stroke-width:3px
     
-    class Start start
-    class ShowExisting,DirectCreate,UseExisting,CreateNew,UpdateExisting,DeleteExisting,ConvType,SpecType,OrchType,AssistType,WebTool,APITool,DBTool,CustomTool,NoTools,SaveAgent,SelectExisting,ModifyAgent,UpdateAgent,SelectToDelete,DeleteAgent,CleanupVars,Return process
-    class CheckExisting,UserChoice,SelectType,SelectTools,ValidateCreation,ConfirmDelete decision
-    class InputName,InputInstructions input
-    class CreateAgent azure
-    class Success success
-    class ShowError error
-    class End end
+    class Start startNode
+    class ShowExisting,DirectCreate,UseExisting,CreateNew,UpdateExisting,DeleteExisting,ConvType,SpecType,OrchType,AssistType,WebTool,APITool,DBTool,CustomTool,NoTools,SaveAgent,SelectExisting,ModifyAgent,UpdateAgent,SelectToDelete,DeleteAgent,CleanupVars,Return processNode
+    class CheckExisting,UserChoice,SelectType,SelectTools,ValidateCreation,ConfirmDelete decisionNode
+    class InputName,InputInstructions inputNode
+    class CreateAgent azureNode
+    class Success successNode
+    class ShowError errorNode
+    class EndFlow endNode
 ```
 
 ### Flujo de Conversación
@@ -323,26 +323,26 @@ flowchart TD
     
     CreateAgent --> Return
     ExitChat --> SaveHistory[💾 Guardar Historial<br/>de Conversación]
-    SaveHistory --> End([🔚 Fin])
-    Return --> End
+    SaveHistory --> EndFlow([🔚 Fin])
+    Return --> EndFlow
     
-    classDef start fill:#c8e6c9,stroke:#4caf50,stroke-width:3px
-    classDef process fill:#bbdefb,stroke:#2196f3,stroke-width:2px
-    classDef decision fill:#ffe0b2,stroke:#ff9800,stroke-width:2px
-    classDef security fill:#fff3e0,stroke:#f57c00,stroke-width:2px
-    classDef azure fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-    classDef error fill:#ffcdd2,stroke:#f44336,stroke-width:2px
-    classDef success fill:#c8e6c9,stroke:#4caf50,stroke-width:2px
-    classDef end fill:#f8bbd9,stroke:#e91e63,stroke-width:3px
+    classDef startNode fill:#c8e6c9,stroke:#4caf50,stroke-width:3px
+    classDef processNode fill:#bbdefb,stroke:#2196f3,stroke-width:2px
+    classDef decisionNode fill:#ffe0b2,stroke:#ff9800,stroke-width:2px
+    classDef securityNode fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef azureNode fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef errorNode fill:#ffcdd2,stroke:#f44336,stroke-width:2px
+    classDef successNode fill:#c8e6c9,stroke:#4caf50,stroke-width:2px
+    classDef endNode fill:#f8bbd9,stroke:#e91e63,stroke-width:3px
     
-    class Start start
-    class ShowAgents,SelectAgent,InitializeChat,LoadAgent,StartChatLoop,WaitInput,SendToAgent,AgentProcess,ReceiveResponse,DisplayResponse,LogInteraction,CreateAgent,SaveHistory process
-    class CheckAgents,OfferCreate,CheckExit,InputSafe,ResponseSafe decision
-    class SetupModeration,ModerateInput,ModerateResponse,FilterResponse,GenericResponse security
-    class LoadAgent,SendToAgent,AgentProcess,ReceiveResponse azure
-    class NoAgents,WarnUser error
-    class ExitChat success
-    class Return,End end
+    class Start startNode
+    class ShowAgents,SelectAgent,InitializeChat,LoadAgent,StartChatLoop,WaitInput,SendToAgent,AgentProcess,ReceiveResponse,DisplayResponse,LogInteraction,CreateAgent,SaveHistory processNode
+    class CheckAgents,OfferCreate,CheckExit,InputSafe,ResponseSafe decisionNode
+    class SetupModeration,ModerateInput,ModerateResponse,FilterResponse,GenericResponse securityNode
+    class LoadAgent,SendToAgent,AgentProcess,ReceiveResponse azureNode
+    class NoAgents,WarnUser errorNode
+    class ExitChat successNode
+    class Return,EndFlow endNode
 ```
 
 ## 📊 Diagramas de Secuencia
@@ -948,7 +948,7 @@ flowchart TB
     end
     
     subgraph "🔌 External APIs"
-        ChuckAPI[Chuck Norris API]
+        ChuckAPI[🥋 Chuck Norris API]
         WebAPIs[External Web APIs]
     end
     
@@ -1378,11 +1378,11 @@ flowchart LR
     Portal --> BuiltIn
     API --> Custom
     
-    classDef available fill:#c8e6c9,stroke:#4caf50,stroke-width:2px
-    classDef apiOnly fill:#ffcdd2,stroke:#f44336,stroke-width:2px
+    classDef availableNode fill:#c8e6c9,stroke:#4caf50,stroke-width:2px
+    classDef apiOnlyNode fill:#ffcdd2,stroke:#f44336,stroke-width:2px
     
-    class Portal,BuiltIn available
-    class API,Custom apiOnly
+    class Portal,BuiltIn availableNode
+    class API,Custom apiOnlyNode
 ```
 
 **🚫 Azure Functions y MCP no aparecen en el portal:**
@@ -1409,11 +1409,11 @@ flowchart TB
     MCP[Model Context Protocol<br/>Preview] --> USW1
     MCP --> USW2
     
-    classDef available fill:#c8e6c9,stroke:#4caf50,stroke-width:2px
-    classDef unavailable fill:#ffcdd2,stroke:#f44336,stroke-width:2px
+    classDef availableNode fill:#c8e6c9,stroke:#4caf50,stroke-width:2px
+    classDef unavailableNode fill:#ffcdd2,stroke:#f44336,stroke-width:2px
     
-    class USW1,USW2 available
-    class EUS,WEU,SEA,Others unavailable
+    class USW1,USW2 availableNode
+    class EUS,WEU,SEA,Others unavailableNode
 ```
 
 **⚠️ MCP está en Preview limitado:**
