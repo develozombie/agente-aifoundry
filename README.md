@@ -22,7 +22,7 @@ Este es un sistema completo para crear, gestionar y conversar con agentes de IA 
 ### Arquitectura de Alto Nivel
 
 ```mermaid
-graph TB
+flowchart TB
     User[👤 Usuario] --> CLI[🖥️ CLI Interface<br/>inicio.py]
     
     CLI --> AgentMgr[🤖 Gestión de Agentes<br/>crear_agente.py]
@@ -51,13 +51,12 @@ graph TB
     class AzAI,ContentSafety,AzFunc,ServiceBus,AppInsights azure
     class CLI,AgentMgr,ChatSys,FuncInt python
     class MCPSrv,ChuckAPI optional
-    class AzFunc dotnet
 ```
 
 ### Arquitectura de Componentes Detallada
 
 ```mermaid
-graph TB
+flowchart TB
     subgraph "🖥️ Interfaz de Usuario"
         CLI[inicio.py<br/>Orquestador Principal]
         Menu[Menú Interactivo<br/>1-5 Opciones]
@@ -792,7 +791,7 @@ classDiagram
 ### Dependencias del Sistema
 
 ```mermaid
-graph TB
+flowchart TB
     subgraph "🐍 Aplicación Python"
         App[Sistema de Agentes]
         InicioMod[inicio.py]
@@ -908,7 +907,7 @@ graph TB
 ### Arquitectura de Despliegue en Azure
 
 ```mermaid
-graph TB
+flowchart TB
     subgraph "🌐 Internet"
         User[👤 Usuario Final]
         Developer[👨‍💻 Desarrollador]
@@ -994,55 +993,54 @@ graph TB
 ### Diagrama de Componentes de Despliegue
 
 ```mermaid
-deployment
-
-    node "💻 Desarrollo Local" {
-        component "🐍 Python 3.8+" as Python
-        component "🎯 Sistema de Agentes" as App
-        component "📁 Archivos de Configuración" as Config
+flowchart TB
+    subgraph "💻 Desarrollo Local"
+        Python[🐍 Python 3.8+]
+        App[🎯 Sistema de Agentes]
+        Config[📁 Archivos de Configuración]
         
         Python --> App
         Config --> App
-    }
+    end
     
-    node "☁️ Azure AI Foundry" {
-        component "🤖 Agentes AI" as Agents
-        component "🧠 Modelos GPT-4/4o" as Models
-        component "🛡️ Content Safety" as Safety
+    subgraph "☁️ Azure AI Foundry"
+        Agents[🤖 Agentes AI]
+        Models[🧠 Modelos GPT-4/4o]
+        Safety[🛡️ Content Safety]
         
         Models --> Agents
         Safety --> Agents
-    }
+    end
     
-    node "⚡ Azure Functions" {
-        component "🔄 Queue Trigger" as Trigger
-        component "📨 Service Bus" as Queue
-        component "💾 Storage Account" as Storage
+    subgraph "⚡ Azure Functions"
+        Trigger[🔄 Queue Trigger]
+        Queue[📨 Service Bus]
+        Storage[💾 Storage Account]
         
         Queue --> Trigger
         Trigger --> Storage
-    }
+    end
     
-    node "📊 Monitoreo" {
-        component "📈 Application Insights" as Insights
-        component "📋 Log Analytics" as Logs
-        component "🔍 Azure Monitor" as Monitor
+    subgraph "📊 Monitoreo"
+        Insights[📈 Application Insights]
+        Logs[📋 Log Analytics]
+        Monitor[🔍 Azure Monitor]
         
         Insights --> Logs
         Logs --> Monitor
-    }
+    end
     
-    node "🔌 APIs Externas" {
-        component "🥋 Chuck Norris API" as ChuckAPI
-        component "🌐 Web APIs" as WebAPIs
-    }
+    subgraph "🔌 APIs Externas"
+        ChuckAPI[🥋 Chuck Norris API]
+        WebAPIs[🌐 Web APIs]
+    end
     
-    App --> Agents : "Gestión y Chat"
-    App --> Safety : "Moderación"
-    App --> Insights : "Telemetría"
-    App --> Queue : "Procesamiento Async"
-    App --> ChuckAPI : "MCP Server"
-    App --> WebAPIs : "Herramientas Agente"
+    App --> Agents
+    App --> Safety
+    App --> Insights
+    App --> Queue
+    App --> ChuckAPI
+    App --> WebAPIs
 ```
 
 ## 🚀 Inicio Rápido
@@ -1366,7 +1364,7 @@ Antes de implementar en producción, ten en cuenta estas limitaciones actuales:
 #### **🔧 Herramientas y Extensiones**
 
 ```mermaid
-graph LR
+flowchart LR
     subgraph "✅ Disponible en Portal"
         Portal[Portal Azure AI Foundry]
         BuiltIn[Herramientas Built-in<br/>• Code Interpreter<br/>• File Search<br/>• Web Search]
@@ -1395,7 +1393,7 @@ graph LR
 #### **🌍 Disponibilidad Regional del MCP**
 
 ```mermaid
-graph TB
+flowchart TB
     subgraph "🟢 MCP Disponible"
         USW1[us-west]
         USW2[us-west-2]
