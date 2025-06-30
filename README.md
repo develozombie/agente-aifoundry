@@ -23,18 +23,24 @@ Este es un sistema completo para crear, gestionar y conversar con agentes de IA 
 
 ```mermaid
 flowchart TB
-    User[👤 Usuario] --> CLI[🖥️ CLI Interface<br/>inicio.py]
+    User[👤 Usuario] --> CLI["🖥️ CLI Interface
+    inicio.py"]
     
-    CLI --> AgentMgr[🤖 Gestión de Agentes<br/>crear_agente.py]
-    CLI --> ChatSys[💬 Sistema de Chat<br/>conversar_agente.py]
-    CLI --> MCPSrv[🔌 Servidor MCP<br/>chuck_norris_server.py]
-    CLI --> FuncInt[🔗 Integración Functions<br/>conversar_function.py]
+    CLI --> AgentMgr["🤖 Gestión de Agentes
+    crear_agente.py"]
+    CLI --> ChatSys["💬 Sistema de Chat
+    conversar_agente.py"]
+    CLI --> MCPSrv["🔌 Servidor MCP
+    chuck_norris_server.py"]
+    CLI --> FuncInt["🔗 Integración Functions
+    conversar_function.py"]
     
     AgentMgr --> AzAI[☁️ Azure AI Foundry]
     ChatSys --> AzAI
     ChatSys --> ContentSafety[🛡️ Content Safety]
     
-    FuncInt --> AzFunc[⚡ Azure Functions<br/>.NET 8]
+    FuncInt --> AzFunc["⚡ Azure Functions
+    .NET 8"]
     AzFunc --> ServiceBus[📨 Service Bus Queue]
     
     MCPSrv --> ChuckAPI[🥋 Chuck Norris API]
@@ -58,19 +64,33 @@ flowchart TB
 ```mermaid
 flowchart TB
     subgraph "🖥️ Interfaz de Usuario"
-        CLI[inicio.py<br/>Orquestador Principal]
-        Menu[Menú Interactivo<br/>1-5 Opciones]
+        CLI["inicio.py
+        Orquestador Principal"]
+        Menu["Menú Interactivo
+        1-5 Opciones"]
     end
     
     subgraph "🤖 Gestión de Agentes"
         AgentMgr[crear_agente.py]
-        AgentTypes[Tipos de Agentes<br/>• Conversacional<br/>• Especialista<br/>• Orquestador<br/>• Asistente]
-        AgentTools[Herramientas<br/>• Web Search<br/>• APIs<br/>• Databases<br/>• Custom Functions]
+        AgentTypes["Tipos de Agentes
+        • Conversacional
+        • Especialista
+        • Orquestador
+        • Asistente"]
+        AgentTools["Herramientas
+        • Web Search
+        • APIs
+        • Databases
+        • Custom Functions"]
     end
     
     subgraph "💬 Sistema de Conversación"
         ChatSys[conversar_agente.py]
-        Moderation[Moderación<br/>• Odio<br/>• Violencia<br/>• Sexual<br/>• Autolesiones]
+        Moderation["Moderación
+        • Odio
+        • Violencia
+        • Sexual
+        • Autolesiones"]
         ChatHistory[Historial de Chat]
     end
     
@@ -82,15 +102,25 @@ flowchart TB
     
     subgraph "⚡ Azure Functions"
         FuncInt[conversar_function.py]
-        DotNetFunc[QueueTrigger1.cs<br/>.NET 8]
-        FuncConfig[host.json<br/>local.settings.json]
+        DotNetFunc["QueueTrigger1.cs
+        .NET 8"]
+        FuncConfig["host.json
+        local.settings.json"]
     end
     
     subgraph "☁️ Azure Services"
-        AzAI[Azure AI Foundry<br/>• GPT-4/4o<br/>• Agent Management]
-        ContentSafety[Content Safety<br/>• Text Analysis<br/>• Safety Scores]
-        AppInsights[Application Insights<br/>• Telemetry<br/>• Monitoring]
-        ServiceBus[Service Bus<br/>• Message Queue<br/>• Async Processing]
+        AzAI["Azure AI Foundry
+        • GPT-4/4o
+        • Agent Management"]
+        ContentSafety["Content Safety
+        • Text Analysis
+        • Safety Scores"]
+        AppInsights["Application Insights
+        • Telemetry
+        • Monitoring"]
+        ServiceBus["Service Bus
+        • Message Queue
+        • Async Processing"]
     end
     
     CLI --> Menu
@@ -138,7 +168,8 @@ flowchart TB
 ```mermaid
 flowchart TD
     Start([🚀 Iniciar Sistema]) --> ValidateEnv{🔍 Validar Entorno}
-    ValidateEnv -->|❌ Error| ShowError[❌ Mostrar Errores<br/>Variables faltantes]
+    ValidateEnv -->|❌ Error| ShowError["❌ Mostrar Errores
+    Variables faltantes"]
     ValidateEnv -->|✅ OK| ShowMenu[📋 Mostrar Menú Principal]
     
     ShowMenu --> MenuChoice{👤 Selección Usuario}
@@ -195,7 +226,8 @@ flowchart TD
 flowchart TD
     Start([🚀 Iniciar Creación]) --> CheckExisting{🔍 ¿Agentes Existentes?}
     
-    CheckExisting -->|✅ Sí| ShowExisting[📋 Mostrar Agentes<br/>Existentes]
+    CheckExisting -->|✅ Sí| ShowExisting["📋 Mostrar Agentes
+    Existentes"]
     CheckExisting -->|❌ No| DirectCreate[➕ Crear Primer Agente]
     
     ShowExisting --> UserChoice{👤 Elección Usuario}
@@ -233,10 +265,12 @@ flowchart TD
     NoTools --> CreateAgent
     
     CreateAgent --> ValidateCreation{✅ ¿Creación Exitosa?}
-    ValidateCreation -->|✅ Sí| SaveAgent[💾 Guardar en Variables<br/>de Entorno]
+    ValidateCreation -->|✅ Sí| SaveAgent["💾 Guardar en Variables
+    de Entorno"]
     ValidateCreation -->|❌ No| ShowError[❌ Mostrar Error]
     
-    SaveAgent --> Success[🎉 Agente Creado<br/>Exitosamente]
+    SaveAgent --> Success["🎉 Agente Creado
+    Exitosamente"]
     
     UpdateExisting --> SelectExisting[🎯 Seleccionar Agente]
     SelectExisting --> ModifyAgent[📝 Modificar Propiedades]
@@ -280,49 +314,66 @@ flowchart TD
 flowchart TD
     Start([💬 Iniciar Conversación]) --> CheckAgents{🤖 ¿Agentes Disponibles?}
     
-    CheckAgents -->|❌ No| NoAgents[❌ No hay agentes<br/>disponibles]
-    CheckAgents -->|✅ Sí| ShowAgents[📋 Mostrar Lista<br/>de Agentes]
+    CheckAgents -->|❌ No| NoAgents["❌ No hay agentes
+    disponibles"]
+    CheckAgents -->|✅ Sí| ShowAgents["📋 Mostrar Lista
+    de Agentes"]
     
     NoAgents --> OfferCreate{❓ ¿Crear Agente?}
-    OfferCreate -->|✅ Sí| CreateAgent[➕ Ir a Gestión<br/>de Agentes]
+    OfferCreate -->|✅ Sí| CreateAgent["➕ Ir a Gestión
+    de Agentes"]
     OfferCreate -->|❌ No| Return[↩️ Volver al Menú]
     
     ShowAgents --> SelectAgent[🎯 Seleccionar Agente]
-    SelectAgent --> InitializeChat[🚀 Inicializar Sistema<br/>de Chat]
+    SelectAgent --> InitializeChat["🚀 Inicializar Sistema
+    de Chat"]
     
-    InitializeChat --> LoadAgent[📥 Cargar Agente<br/>desde Azure AI]
-    LoadAgent --> SetupModeration[🛡️ Configurar<br/>Moderación]
-    SetupModeration --> StartChatLoop[💬 Iniciar Bucle<br/>de Conversación]
+    InitializeChat --> LoadAgent["📥 Cargar Agente
+    desde Azure AI"]
+    LoadAgent --> SetupModeration["🛡️ Configurar
+    Moderación"]
+    SetupModeration --> StartChatLoop["💬 Iniciar Bucle
+    de Conversación"]
     
-    StartChatLoop --> WaitInput[⏳ Esperar Entrada<br/>del Usuario]
+    StartChatLoop --> WaitInput["⏳ Esperar Entrada
+    del Usuario"]
     WaitInput --> CheckExit{🚪 ¿Comando Salir?}
     
     CheckExit -->|✅ Sí| ExitChat[👋 Salir del Chat]
     CheckExit -->|❌ No| ModerateInput[🛡️ Moderar Entrada]
     
     ModerateInput --> InputSafe{🔒 ¿Entrada Segura?}
-    InputSafe -->|❌ No| WarnUser[⚠️ Advertir Usuario<br/>Contenido Inapropiado]
-    InputSafe -->|✅ Sí| SendToAgent[📤 Enviar a Agente<br/>Azure AI]
+    InputSafe -->|❌ No| WarnUser["⚠️ Advertir Usuario
+    Contenido Inapropiado"]
+    InputSafe -->|✅ Sí| SendToAgent["📤 Enviar a Agente
+    Azure AI"]
     
     WarnUser --> WaitInput
     
-    SendToAgent --> AgentProcess[🤖 Procesar con<br/>Agente AI]
-    AgentProcess --> ReceiveResponse[📥 Recibir Respuesta<br/>del Agente]
+    SendToAgent --> AgentProcess["🤖 Procesar con
+    Agente AI"]
+    AgentProcess --> ReceiveResponse["📥 Recibir Respuesta
+    del Agente"]
     
     ReceiveResponse --> ModerateResponse[🛡️ Moderar Respuesta]
     ModerateResponse --> ResponseSafe{🔒 ¿Respuesta Segura?}
     
-    ResponseSafe -->|❌ No| FilterResponse[🚫 Filtrar Respuesta<br/>Peligrosa]
-    ResponseSafe -->|✅ Sí| DisplayResponse[📺 Mostrar Respuesta<br/>al Usuario]
+    ResponseSafe -->|❌ No| FilterResponse["🚫 Filtrar Respuesta
+    Peligrosa"]
+    ResponseSafe -->|✅ Sí| DisplayResponse["📺 Mostrar Respuesta
+    al Usuario"]
     
-    FilterResponse --> GenericResponse[📝 Respuesta Genérica<br/>Segura]
+    FilterResponse --> GenericResponse["📝 Respuesta Genérica
+    Segura"]
     GenericResponse --> DisplayResponse
     
-    DisplayResponse --> LogInteraction[📝 Registrar Interacción<br/>en Telemetría]
+    DisplayResponse --> LogInteraction["📝 Registrar Interacción
+    en Telemetría"]
     LogInteraction --> WaitInput
     
     CreateAgent --> Return
-    ExitChat --> SaveHistory[💾 Guardar Historial<br/>de Conversación]
+    ExitChat --> SaveHistory["💾 Guardar Historial
+    de Conversación"]
     SaveHistory --> EndFlow([🔚 Fin])
     Return --> EndFlow
     
@@ -929,8 +980,10 @@ flowchart TB
             end
             
             subgraph "⚡ Compute Services"
-                Functions[Azure Functions<br/>.NET 8]
-                AppService[App Service<br/>(Opcional)]
+                Functions["Azure Functions
+                .NET 8"]
+                AppService["App Service
+                (Opcional)"]
             end
             
             subgraph "💾 Data Services"
@@ -948,7 +1001,7 @@ flowchart TB
     end
     
     subgraph "🔌 External APIs"
-        ChuckAPI[🥋 Chuck Norris API]
+        ChuckAPI[Chuck Norris API]
         WebAPIs[External Web APIs]
     end
     
@@ -1367,12 +1420,18 @@ Antes de implementar en producción, ten en cuenta estas limitaciones actuales:
 flowchart LR
     subgraph "✅ Disponible en Portal"
         Portal[Portal Azure AI Foundry]
-        BuiltIn[Herramientas Built-in<br/>• Code Interpreter<br/>• File Search<br/>• Web Search]
+        BuiltIn["Herramientas Built-in
+        • Code Interpreter
+        • File Search
+        • Web Search"]
     end
     
     subgraph "❌ Solo por API"
         API[Azure AI Agents API]
-        Custom[Herramientas Personalizadas<br/>• Azure Functions<br/>• MCP Servers<br/>• APIs Externas]
+        Custom["Herramientas Personalizadas
+        • Azure Functions
+        • MCP Servers
+        • APIs Externas"]
     end
     
     Portal --> BuiltIn
@@ -1406,7 +1465,8 @@ flowchart TB
         Others[Otras Regiones...]
     end
     
-    MCP[Model Context Protocol<br/>Preview] --> USW1
+    MCP["Model Context Protocol
+    Preview"] --> USW1
     MCP --> USW2
     
     classDef availableNode fill:#c8e6c9,stroke:#4caf50,stroke-width:2px
