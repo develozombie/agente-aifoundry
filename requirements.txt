@@ -1,11 +1,13 @@
 pytest
 openai
-azure-ai-projects
-azure-ai-agents
+azure-ai-projects==1.0.0b12
+azure-ai-agents==1.1.0b2
 azure-identity
 python-dotenv
+mcp.server
 azure-ai-contentsafety
 azure-ai-inference
 azure-monitor-opentelemetry
 opentelemetry-api
 opentelemetry-sdk
+httpx

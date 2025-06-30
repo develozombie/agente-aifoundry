@@ -1,10 +1,10 @@
 """
 DESCRIPCIÓN:
     Esta muestra demuestra un agente conversacional usando
-    el servicio Azure Agents con entrada del usuario.
+    el servicio Azure Agents con entrada del usuario y selección de agente.
 
 USO:
-    python basic-agent.py
+    python conversar_agente.py
 
     Antes de ejecutar la muestra:
 
@@ -16,7 +16,7 @@ USO:
        la pestaña "Modelos + endpoints" en tu proyecto Azure AI Foundry.
 """
 
-import os, time, sys
+import os, time, sys, json
 from azure.ai.agents import AgentsClient
 from azure.identity import DefaultAzureCredential
 from azure.ai.agents.models import ListSortOrder, MessageTextContent
@@ -43,6 +43,10 @@ else:
 
 load_dotenv(encoding='utf-8')
 
+# Cargar info de sesion de usuario
+metadata_usuario = {
+            "customer_id": "88129215"
+}
 # Configurar instrumentación de tracing
 AIInferenceInstrumentor().instrument()
 
@@ -164,25 +168,106 @@ def obtener_entrada_usuario_segura():
         print(f"⚠️ Error inesperado al leer entrada: {e}")
         return ""
 
+def obtener_agentes_disponibles():
+    """
+    Obtiene la lista de agentes disponibles desde variables de entorno.
+    
+    @returns {list} Lista de agentes con su información
+    """
+    try:
+        agentes_json = os.environ.get("AGENTS_DATA", "[]")
+        agentes = json.loads(agentes_json)
+        return agentes
+    except json.JSONDecodeError:
+        return []
+    except Exception as e:
+        print(f"⚠️ Error al obtener agentes: {e}")
+        return []
+
+def seleccionar_agente():
+    """
+    Permite al usuario seleccionar un agente para la conversación.
+    
+    @returns {str} ID del agente seleccionado
+    """
+    agentes = obtener_agentes_disponibles()
+    
+    if not agentes:
+        print("📭 No hay agentes disponibles")
+        print("💡 Ejecuta primero: python crear_agente.py")
+        sys.exit(1)
+    
+    print("\n🤖 Selecciona un agente para conversar:")
+    print("=" * 50)
+    
+    # Mostrar agentes disponibles
+    for i, agente in enumerate(agentes, 1):
+        print(f"{i}. {agente['nombre']} ({agente['tipo']})")
+        print(f"   ID: {agente['id']}")
+        print(f"   Creado: {agente.get('fecha_creacion', 'N/A')}")
+        print()
+    
+    print(f"{len(agentes) + 1}. Ingresar ID manualmente")
+    print("0. Salir")
+    
+    while True:
+        try:
+            opcion = input("\nIngresa tu opción: ").strip()
+            
+            if opcion == "0":
+                print("👋 ¡Hasta luego!")
+                sys.exit(0)
+            elif opcion == str(len(agentes) + 1):
+                # Ingresar ID manualmente
+                agent_id = input("\n🆔 Ingresa el ID del agente: ").strip()
+                if agent_id:
+                    # Validar que el agente existe
+                    try:
+                        with AgentsClient(
+                            endpoint=os.environ["PROJECT_ENDPOINT"],
+                            credential=DefaultAzureCredential(),
+                        ) as cliente:
+                            agente = cliente.get_agent(agent_id)
+                            print(f"✅ Agente encontrado: {agente.name}")
+                            return agent_id
+                    except Exception as e:
+                        print(f"❌ Error al validar agente {agent_id}: {e}")
+                        continue
+                else:
+                    print("❌ ID no válido")
+                    continue
+            else:
+                try:
+                    indice = int(opcion) - 1
+                    if 0 <= indice < len(agentes):
+                        agente_seleccionado = agentes[indice]
+                        print(f"✅ Seleccionaste: {agente_seleccionado['nombre']}")
+                        return agente_seleccionado['id']
+                    else:
+                        print("❌ Opción no válida")
+                        continue
+                except ValueError:
+                    print("❌ Por favor ingresa un número válido")
+                    continue
+                    
+        except KeyboardInterrupt:
+            print("\n👋 ¡Hasta luego!")
+            sys.exit(0)
+
 with cliente_agentes:
     with trazador.start_as_current_span("sesion_agente_conversacional") as span_sesion:
-        # [INICIO obtener_agente]
-        agent_id = os.environ.get("AGENT_ID")
-        if not agent_id:
-            print("❌ No se encontró AGENT_ID en variables de entorno")
-            print("💡 Ejecuta primero: python crear_agente.py")
-            sys.exit(1)
+        # Seleccionar agente
+        agent_id = seleccionar_agente()
         
         try:
-            # Obtener agente existente en lugar de crear uno nuevo
+            # Obtener agente existente
             agente = cliente_agentes.get_agent(agent_id)
-            print(f"✅ Usando agente existente: {agente.name}")
+            print(f"\n✅ Usando agente: {agente.name}")
             print(f"🆔 ID del agente: {agente.id}")
         except Exception as e:
             print(f"❌ Error al obtener agente {agent_id}: {e}")
             print("💡 El agente puede haber sido eliminado. Ejecuta: python crear_agente.py")
             sys.exit(1)
-        # [FIN obtener_agente]
 
         # [INICIO crear_hilo]
         hilo = cliente_agentes.threads.create()
@@ -238,7 +323,7 @@ with cliente_agentes:
                     mensaje = cliente_agentes.messages.create(
                         thread_id=hilo.id, 
                         role="user", 
-                        content=entrada_usuario
+                        content=f"[CONTEXT: customer_id={metadata_usuario['customer_id']}] {entrada_usuario}"
                     )
 
                 # Crear y ejecutar el agente
