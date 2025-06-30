@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "chuck-norris-jokes": {
+      "command": "/Users/jose/proyectoAgentes/agente-aifoundry/bin/python",
+      "args": ["/Users/jose/proyectoAgentes/agente-aifoundry/chuck_norris_server.py"],
+      "env": {}
+    }
+  }
+}
